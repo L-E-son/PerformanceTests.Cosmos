@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PerformanceTests.Cosmos
 {
+    [MarkdownExporter]
     public class Benchmarks
     {
         [Params(1, 10, 100, 1_000)]
@@ -53,6 +54,12 @@ namespace PerformanceTests.Cosmos
             }
 
             await Task.WhenAll(tasks);
+        }
+
+        [GlobalCleanup]
+        public async Task GlobalCleanup()
+        {
+            await Task.Delay(5_000);
         }
     }
 }
